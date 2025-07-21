@@ -218,7 +218,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors duration-200"
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors duration-200 relative z-50"
             aria-label="Toggle mobile menu"
           >
             <div className="relative w-6 h-6">
@@ -243,133 +243,208 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden fixed inset-0 transition-all duration-300 ease-in-out z-40 ${
             isMobileMenuOpen
-              ? "max-h-96 opacity-100 pb-6"
-              : "max-h-0 opacity-0 overflow-hidden"
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
         >
-          <div className="pt-4 space-y-2">
-            {isAuthenticated ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  className={mobileNavLinkClass("/dashboard")}
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-gray-900/30 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+
+          {/* Mobile Menu Sidebar */}
+          <div
+            className={`absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
+              isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-gray-800">Menu</div>
+                  <div className="text-xs text-gray-500">AI Voice Agent</div>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <div className="flex items-center space-x-3">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile Menu Content */}
+            <div className="px-4 py-6 space-y-2 overflow-y-auto h-full">
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    className={mobileNavLinkClass("/dashboard")}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                        />
+                      </svg>
+                      <span>Dashboard</span>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/history"
+                    className={mobileNavLinkClass("/history")}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>Call History</span>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/profile"
+                    className={mobileNavLinkClass("/profile")}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <span>Profile</span>
+                    </div>
+                  </Link>
+                  <div className="my-6 border-t border-gray-200"></div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-6 py-3 rounded-xl bg-gradient-to-r from-red-50 to-pink-50 text-red-600 font-medium hover:from-red-100 hover:to-pink-100 transition-all duration-300 border-l-4 border-red-400"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      <span>Logout</span>
+                    </div>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className={mobileNavLinkClass("/login")}>
+                    <div className="flex items-center space-x-3">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      <span>Login</span>
+                    </div>
+                  </Link>
+                  <div className="px-2 pt-4">
+                    <Link
+                      to="/register"
+                      className="block w-full px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                    <span>Dashboard</span>
+                      <div className="flex items-center justify-center space-x-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                          />
+                        </svg>
+                        <span>Get Started</span>
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-                <Link to="/history" className={mobileNavLinkClass("/history")}>
-                  <div className="flex items-center space-x-3">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>Call History</span>
-                  </div>
-                </Link>
-                <div className="my-4 border-t border-gray-200"></div>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-6 py-3 rounded-xl bg-gradient-to-r from-red-50 to-pink-50 text-red-600 font-medium hover:from-red-100 hover:to-pink-100 transition-all duration-300 border-l-4 border-red-400"
-                >
-                  <div className="flex items-center space-x-3">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    <span>Logout</span>
-                  </div>
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className={mobileNavLinkClass("/login")}>
-                  <div className="flex items-center space-x-3">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    <span>Login</span>
-                  </div>
-                </Link>
-                <Link
-                  to="/register"
-                  className="block mx-6 mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md"
-                >
-                  <div className="flex items-center justify-center space-x-2">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-                      />
-                    </svg>
-                    <span>Get Started</span>
-                  </div>
-                </Link>
-              </>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Mobile menu backdrop */}
-      {isMobileMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-gray-900/20 backdrop-blur-sm z-[-1]"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
     </nav>
   );
 };
