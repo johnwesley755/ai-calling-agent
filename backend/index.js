@@ -13,6 +13,7 @@ dotenv.config();
 const authRoutes = require("./routes/auth");
 const callRoutes = require("./routes/call");
 const webhookRoutes = require("./routes/webhook");
+const profileRoutes = require('./routes/profile');
 
 // Initialize express app
 const app = express();
@@ -26,8 +27,10 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/call", callRoutes);
-app.use("/api/webhook", webhookRoutes);
+app.use("/api/calls", callRoutes);
+app.use("/api/webhooks", webhookRoutes);
+
+app.use('/api/profile', profileRoutes); // Add this line
 
 // Add this with your other route imports
 const scriptRoutes = require('./routes/script');

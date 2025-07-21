@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import CallHistory from './pages/CallHistory';
+import Profile from './pages/Profile'; // Import the new Profile component
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,14 @@ const App: React.FC = () => {
               element={
                 <PrivateRoute>
                   <CallHistory />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <PrivateRoute>
+                  <Profile />
                 </PrivateRoute>
               } 
             />

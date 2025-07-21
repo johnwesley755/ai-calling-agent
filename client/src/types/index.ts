@@ -2,6 +2,9 @@ export interface User {
   _id: string;
   email: string;
   name: string;
+  phone?: string;
+  company?: string;
+  jobTitle?: string;
 }
 
 export interface AuthState {

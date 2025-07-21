@@ -18,6 +18,21 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  phone: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  company: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  jobTitle: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now
