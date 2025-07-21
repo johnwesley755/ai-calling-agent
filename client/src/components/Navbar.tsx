@@ -216,31 +216,20 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors duration-200 relative z-50"
-            aria-label="Toggle mobile menu"
-          >
-            <div className="relative w-6 h-6">
-              <span
-                className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMobileMenuOpen ? "rotate-45 translate-y-0" : "translate-y-1"
-                }`}
-              />
-              <span
-                className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 translate-y-2.5 ${
-                  isMobileMenuOpen ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`absolute block w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMobileMenuOpen
-                    ? "-rotate-45 translate-y-0"
-                    : "translate-y-4"
-                }`}
-              />
-            </div>
-          </button>
+          {/* Mobile Menu Button – Only show when menu is closed */}
+          {!isMobileMenuOpen && (
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors duration-200 relative z-50"
+              aria-label="Open mobile menu"
+            >
+              <div className="relative w-6 h-6">
+                <span className="absolute block w-6 h-0.5 bg-current translate-y-1 transition-all duration-300" />
+                <span className="absolute block w-6 h-0.5 bg-current translate-y-2.5 transition-all duration-300" />
+                <span className="absolute block w-6 h-0.5 bg-current translate-y-4 transition-all duration-300" />
+              </div>
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Overlay */}
