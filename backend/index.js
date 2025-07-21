@@ -27,7 +27,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/calls", callRoutes);
+app.use("/api/call", callRoutes);
 app.use("/api/webhooks", webhookRoutes);
 
 app.use('/api/profile', profileRoutes); // Add this line
