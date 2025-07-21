@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCallHistory } from "../services/callService";
 import type { Call } from "../types";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const CallHistory: React.FC = () => {
   const [calls, setCalls] = useState<Call[]>([]);

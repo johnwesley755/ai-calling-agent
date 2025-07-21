@@ -1,18 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "sonner"; // ✅ Import Toaster from sonner
 
-import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/PrivateRoute';
-import Navbar from './components/Navbar';
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/Navbar";
 
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import CallHistory from './pages/CallHistory';
-import Profile from './pages/Profile'; // Import the new Profile component
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import CallHistory from "./pages/CallHistory";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
   return (
@@ -24,33 +23,34 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
                 <PrivateRoute>
                   <Dashboard />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/history" 
+            <Route
+              path="/history"
               element={
                 <PrivateRoute>
                   <CallHistory />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/profile" 
+            <Route
+              path="/profile"
               element={
                 <PrivateRoute>
                   <Profile />
                 </PrivateRoute>
-              } 
+              }
             />
           </Routes>
         </div>
-        <ToastContainer position="top-right" autoClose={3000} />
+        {/* ✅ Sonner Toaster */}
+        <Toaster position="top-right" richColors closeButton />
       </Router>
     </AuthProvider>
   );

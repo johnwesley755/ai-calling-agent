@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { startCall, uploadPhoneNumbers } from "../services/callService";
 import { generateScript } from "../services/geminiService";
 import type { ScriptGenerationRequest } from "../services/geminiService";

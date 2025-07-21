@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import { login } from "../services/authService";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
