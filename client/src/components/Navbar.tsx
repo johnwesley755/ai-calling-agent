@@ -223,7 +223,6 @@ const Navbar: React.FC = () => {
               className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors duration-200 relative z-50"
               aria-label="Open mobile menu"
             >
-            
               <div className="relative w-6 h-6">
                 <span className="absolute block w-6 h-0.5 bg-current translate-y-1 transition-all duration-300" />
                 <span className="absolute block w-6 h-0.5 bg-current translate-y-2.5 transition-all duration-300" />
